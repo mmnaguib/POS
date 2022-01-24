@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Dashboard\DachboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware'=> ['localizationRedirect', 'localeSessionRedirect', 'localeViewPath']], function(){
+    Route::group(['prefix' => 'dashboard'], function(){
+        Route::get('welcome',  [DachboardController::class,'index'])->name('dashboard.index');
+    });
+});
+
 
 Auth::routes();
 
