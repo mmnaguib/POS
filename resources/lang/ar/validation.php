@@ -60,7 +60,7 @@ return [
         'numeric' => 'يجب أن تكون قيمة حقل :attribute مساوية أو أكبر من :value.',
         'string'  => 'يجب أن يكون طول نص حقل :attribute على الأقل :value حروفٍ/حرفًا.',
     ],
-    'image'                => 'يجب أن يكون حقل :attribute صورةً.',
+    'image'                => 'يجب أن يكون حقل :attribute صورةً فقط.',
     'in'                   => 'حقل :attribute غير موجود.',
     'in_array'             => 'حقل :attribute غير موجود في :other.',
     'integer'              => 'يجب أن يكون حقل :attribute عددًا صحيحًا.',
@@ -131,5 +131,14 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+    ],
+    'attributes' => [
+        'first_name' => 'الاسم الاول',
+        'last_name' => 'الاسم الاخر',
+        'email' => 'البريد الالكتروني',
+        'password' => 'كلمة المرور',
+        'password_confirmation' => 'تأكيد كلمة المرور',
+        'image' => 'الصورة',
+        'permission' => 'الصلاحيات'
     ],
 ];

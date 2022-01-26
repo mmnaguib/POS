@@ -183,15 +183,21 @@
                     <li class="dropdown user user-menu">
 
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-
+                            @if(auth()->user()->user_image)
+                                <img src="{{ asset('images\\' . auth()->user()->user_image) }}" class="user-image"  alt="user Image"/>
+                            @else
+                                <img src="{{ asset('images\default.png') }}" alt="user Image" class="user-image" />
+                            @endif
                         </a>
                         <ul class="dropdown-menu">
 
                             {{--<!-- User image -->--}}
                             <li class="user-header">
-                                <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
-
+                                @if(auth()->user()->user_image)
+                                    <img src="{{ asset('images\\' . auth()->user()->user_image) }}" class="img-circle"  alt="user Image"/>
+                                @else
+                                    <img src="{{ asset('images\default.png') }}" alt="user Image" class="img-circle" />
+                                @endif
                                 <p>
                                     <small>Member since 2 days</small>
                                 </p>
@@ -280,7 +286,7 @@
                 type: "warning",
                 killer: true,
                 buttons: [
-                    Noty.button("@lang('site.yes')", 'btn btn-success mr-2', function () {
+                    Noty.button("@lang('site.yes')", 'btn btn-danger mr-2', function () {
                         that.closest('form').submit();
                     }),
                     Noty.button("@lang('site.no')", 'btn btn-primary mr-2', function () {
@@ -291,19 +297,16 @@
             n.show();
         });//end of delete
         // // image preview
-        // $(".image").change(function () {
-        //
-        //     if (this.files && this.files[0]) {
-        //         var reader = new FileReader();
-        //
-        //         reader.onload = function (e) {
-        //             $('.image-preview').attr('src', e.target.result);
-        //         }
-        //
-        //         reader.readAsDataURL(this.files[0]);
-        //     }
-        //
-        // });
+        $(".image").change(function () {
+
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.image-preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
         CKEDITOR.config.language =  "{{ app()->getLocale() }}";
     });//end of ready
 

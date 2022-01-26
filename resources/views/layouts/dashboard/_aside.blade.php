@@ -4,16 +4,23 @@
 
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                @if(auth()->user()->user_image)
+                    <img src="{{ asset('images\\' . auth()->user()->user_image) }}"  class="img-circle" alt="user Image"/>
+                @else
+                    <img src="{{ asset('images\default.png') }}" class="img-circle"  alt="user Image"/>
+                @endif
             </div>
             <div class="pull-left info">
-                <p>Mohamed Naguib</p>
+                <p>{{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
 
         <ul class="sidebar-menu" data-widget="tree">
             <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-th"></i><span>@lang('site.dashboard')</span></a></li>
+            @if (auth()->user()->hasPermission('users_read'))
+                <li><a href="{{ route('users.index') }}"><i class="fa fa-th"></i><span>@lang('site.users')</span></a></li>
+            @endif
 
             {{--@if (auth()->user()->hasPermission('read_categories'))
                 <li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-th"></i><span>@lang('site.categories')</span></a></li>
@@ -31,9 +38,7 @@
                 <li><a href="{{ route('dashboard.orders.index') }}"><i class="fa fa-th"></i><span>@lang('site.orders')</span></a></li>
             @endif
 
-            @if (auth()->user()->hasPermission('read_users'))
-                <li><a href="{{ route('dashboard.users.index') }}"><i class="fa fa-th"></i><span>@lang('site.users')</span></a></li>
-            @endif
+
 
             {{--<li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-book"></i><span>@lang('site.categories')</span></a></li>--}}
             {{----}}
