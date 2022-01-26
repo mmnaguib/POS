@@ -16,10 +16,12 @@ class UserController extends Controller
         $this->middleware(['permission:users_delete'])->only('destroy');
     }
     public function index(Request $request){
-        $users = User::whereRoleIs('admin')->when($request->search, function ($query) use ($request){
-            return $query->where('first_name', 'like' , '%' . $request->search . '%')
-            ->orwhere('last_name', 'like' , '%' . $request->search . '%');
-        })->latest()->paginate(5);
+        $users = User::whereRoleIs('admin')->where(function($q) use ($request){
+            return $q->when($request->search,function ($query) use ($request){
+                return $query->where('first_name', 'like' , '%' . $request->search . '%')
+                ->orwhere('last_name', 'like' , '%' . $request->search . '%');
+            });
+            })->latest()->paginate(5);
 
         return view('dashboard.users.index',compact('users'));
     }

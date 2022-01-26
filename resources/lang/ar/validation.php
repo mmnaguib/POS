@@ -139,6 +139,7 @@ return [
         'password' => 'كلمة المرور',
         'password_confirmation' => 'تأكيد كلمة المرور',
         'image' => 'الصورة',
-        'permission' => 'الصلاحيات'
+        'permission' => 'الصلاحيات',
+        'cat name' => 'اسم القسم'
     ],
 ];

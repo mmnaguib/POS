@@ -3,9 +3,11 @@
 return [
     'dashboard'                 => 'الرئيسية',
     'users'                     => 'المشرفين',
-    'categories'                => 'الاقسام',
-    "products"                  => 'المنتجات',
     'user'                      => 'مشرف',
+    'categories'                => 'الاقسام',
+    'category'                  => 'قسم',
+    'cat_name'                  => 'اسم القسم',
+    "products"                  => 'المنتجات',
     'first_name'                => 'الاسم الاول',
     'last_name'                 => 'الاسم الاخر',
     'email'                     => 'البريد الالكتروني',
