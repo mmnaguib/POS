@@ -24,6 +24,9 @@
             @if (auth()->user()->hasPermission('categories_read'))
                 <li><a href="{{ route('categories.index') }}"><i class="fa fa-th"></i><span>@lang('site.categories')</span></a></li>
             @endif
+            @if (auth()->user()->hasPermission('products_read'))
+                <li><a href="{{ route('products.index') }}"><i class="fa fa-th"></i><span>@lang('site.products')</span></a></li>
+            @endif
             {{--@if (auth()->user()->hasPermission('read_categories'))
                 <li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-th"></i><span>@lang('site.categories')</span></a></li>
             @endif

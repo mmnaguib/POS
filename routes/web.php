@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Dashboard\DachboardController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\ProductController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -38,6 +39,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware'=> ['loca
         Route::get('categories/edit/{id}',  [CategoryController::class,'edit'])->name('categories.edit');
         Route::post('categories/update/{id}',  [CategoryController::class,'update'])->name('categories.update');
         Route::post('categories/destroy/{id}',  [CategoryController::class,'destroy'])->name('categories.destroy');
+
+        // Products Routes
+        Route::get('products',  [ProductController::class,'index'])->name('products.index');
+        Route::get('products/create',  [ProductController::class,'create'])->name('products.create');
+        Route::post('products/store',  [ProductController::class,'store'])->name('products.store');
+        Route::get('products/edit/{id}',  [ProductController::class,'edit'])->name('products.edit');
+        Route::post('products/update/{id}',  [ProductController::class,'update'])->name('products.update');
+        Route::post('products/destroy/{id}',  [ProductController::class,'destroy'])->name('products.destroy');
     });
 });
 
