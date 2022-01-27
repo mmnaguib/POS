@@ -16,8 +16,12 @@ class CategoryController extends Controller
         $this->middleware(['permission:categories_update'])->only(['edit','update']);
         $this->middleware(['permission:categories_delete'])->only('destroy');
     }
-    public function index(){
-        $categories = Category::paginate(5);
+    public function index(Request $request){
+        $categories = Category::where(function($q) use ($request){
+            return $q->when($request->search,function ($query) use ($request){
+                return $query->where('cat_name', 'like' , '%' . $request->search . '%');
+            });
+        })->latest()->paginate(5);
         return view('dashboard.categories.index',compact('categories'));
     }
     public function create(){
@@ -25,11 +29,12 @@ class CategoryController extends Controller
     }
     public function store(Request $request){
         $request->validate([
-            'cat_name' => 'required|max:40|unique:categories,cat_name',
+            'ar_name' => 'required|unique:categories,name->ar',
+            'en_name' => 'required|unique:categories,name->en',
         ]);
-        $user = Category::create([
-            'cat_name' => $request->cat_name,
-        ]);
+        $category = new Category();
+        $category->name = ['ar' => $request->ar_name, 'en' => $request->en_name];
+        $category->save();
         return redirect()->route('categories.index')->with('success', __('site.added_successfully'));
     }
     public function edit($id)
@@ -41,11 +46,11 @@ class CategoryController extends Controller
     public function update(Request $request, $id){
         $category = Category::findOrFail($id);
         $request->validate([
-            'cat_name' => 'required|unique:categories,cat_name,'.$id,
+            'ar_name' => 'required|unique:categories,name->ar,'.$id,
+            'en_name' => 'required|unique:categories,name->en,'.$id,
         ]);
-        $category->update([
-            'cat_name' => $request->cat_name,
-        ]);
+        $category->name = ['ar' => $request->ar_name, 'en' => $request->en_name];
+        $category->save();
         return redirect()->route('categories.index')->with('success', __('site.updated_successfully'));
     }
     public function destroy($id){

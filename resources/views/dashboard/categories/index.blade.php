@@ -42,7 +42,7 @@
                                 @foreach ($categories as $index=>$category)
                                 <tr>
                                     <th>{{ $index+1 }}</th>
-                                    <th>{{ ucfirst($category->cat_name) }}</th>
+                                    <th>{{ ucfirst($category->name) }}</th>
                                     <th>
                                         @if(auth()->user()->hasPermission('categories_update'))
                                             <a class="btn btn-info btn-sm" href="{{ route('categories.edit', $category->id) }}"><i class="fa fa-edit"></i> @lang('site.edit')</a>

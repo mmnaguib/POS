@@ -17,10 +17,12 @@
                 <div class="box-body">
                     @include('partials._errors')
                     <form method="POST" action="{{ route('categories.update', $category->id) }}" enctype="multipart/form-data">@csrf
+                        @foreach(config('translatable.locales') as $locale)
                         <div class="form-group">
-                            <label>@lang('site.cat_name')</label>
-                            <input type="text" class="form-control" name="cat_name" value="{{ $category->cat_name }}" />
+                            <label>@lang('site.' . $locale . '.name')</label>
+                            <input type="text" class="form-control" name="{{ $locale }}_name" value="{{ $category->setLocale($locale)->name}}" />
                         </div>
+                        @endforeach
                         <div class="form-group">
                             <button type="submit" class="btn btn-info"><i class="fa fa-edit"></i> @lang('site.edit')</button>
                         </div>
