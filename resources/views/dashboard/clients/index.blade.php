@@ -37,6 +37,7 @@
                                     <th>@lang('site.client_name')</th>
                                     <th>@lang('site.phone')</th>
                                     <th>@lang('site.address')</th>
+                                    <th>@lang('site.add_order')</th>
                                     <th>@lang('site.actions')</th>
                                 </tr>
                             </thead>
@@ -47,6 +48,11 @@
                                     <th>{{ ucfirst($client->name) }}</th>
                                     <th>{{ implode(array_filter($client->phone), ' - ') }}</th>
                                     <th>{{ $client->address }}</th>
+                                    <th>
+                                        @if (auth()->user()->haspermission('orders_create'))
+                                            <a href="{{ route('client.orders.create', $client->id) }}" class="btn btn-primary btn-sm">@lang('site.add_order')</a>
+                                        @endif
+                                    </th>
                                     <th>
                                         @if(auth()->user()->hasPermission('clients_update'))
                                             <a class="btn btn-info btn-sm" href="{{ route('clients.edit', $client->id) }}"><i class="fa fa-edit"></i> @lang('site.edit')</a>

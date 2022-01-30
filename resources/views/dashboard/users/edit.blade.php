@@ -40,7 +40,7 @@
                             <label>@lang('site.permissions')</label>
                             <div class="nav-tabs-custom">
                                 <?php
-                                    $models = ['users', 'categories', 'products'];
+                                    $models = ['users', 'categories', 'products','clients','orders'];
                                     $cruds = ['create','read','update','delete'];
                                 ?>
                                 <ul class="nav nav-tabs">
