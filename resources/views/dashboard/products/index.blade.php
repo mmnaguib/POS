@@ -18,6 +18,14 @@
                                 <input type="text" placeholder="@lang('site.search')" name="search" class="form-control" value="{{ request()->search }}"/>
                             </div>
                             <div class="col-md-4">
+                                <select name="category_id" class="form-control">
+                                    <option value="" selected>@lang('site.all_categoreis')</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}" {{ request()->category_id == $category->id ? 'selected' : ''  }}>{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4">
                                 <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button>
                                 @if(auth()->user()->hasPermission('products_create'))
                                     <a class="btn btn-info btn-sm" href="{{ route('products.create') }}"><i class="fa fa-plus"></i> @lang('site.add') @lang('site.product')</a>
@@ -36,8 +44,10 @@
                                     <th>#</th>
                                     <th>@lang('site.product_name')</th>
                                     <th>@lang('site.product_desc')</th>
+                                    <th>@lang('site.category')</th>
                                     <th>@lang('site.purchase_price')</th>
                                     <th>@lang('site.sale_price')</th>
+                                    <th>@lang('site.profit')</th>
                                     <th>@lang('site.stock')</th>
                                     <th>@lang('site.product_image')</th>
                                     <th>@lang('site.actions')</th>
@@ -48,9 +58,11 @@
                                 <tr>
                                     <th>{{ $index+1 }}</th>
                                     <th>{{ $product->name }}</th>
-                                    <th>{{ $product->description  }}</th>
+                                    <th>{!! $product->description  !!}</th>
+                                    <th>{{ $product->category->name }}</th>
                                     <th>{{ $product->purchase_price }}</th>
                                     <th>{{ $product->sale_price  }}</th>
+                                    <th>%{{ $product->profit_percent }}</th>
                                     <th>{{ $product->stock }}</th>
                                     <th><img src="{{ asset('images\products\\'. $product->image) }}" width="100px" class="img-thumbnail"/> </th>
                                     <th>

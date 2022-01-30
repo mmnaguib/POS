@@ -23,7 +23,7 @@
                             <select class="form-control" name="category"  value="{{ old('category') }}" >
                                 <option value="" disabled >---- اختر ----</option>
                                 @foreach ($categories as $cat)
-                                <option value="{{ $cat->id }}" selected>{{ $product->category_id }}</option>
+                                <option value="{{ $cat->id }}" {{ $product->category_id == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-group">
                             <label>@lang('site.' . $locale . '.product_desc')</label>
-                            <textarea class="form-control" name="{{ $locale }}_product_desc" cols="10" rows="3">{{ $product->setLocale($locale)->description}}</textarea>
+                            <textarea class="form-control ckeditor" name="{{ $locale }}_product_desc" cols="10" rows="3">{{ $product->setLocale($locale)->description}}</textarea>
                         </div>
                         @endforeach
                         <div class="form-group">
@@ -55,7 +55,7 @@
                             <input type="number" min="1" class="form-control" name="stock"  value="{{ $product->stock }}"/>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.edit')</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> @lang('site.edit')</button>
                         </div>
                     </form>
                 </div>

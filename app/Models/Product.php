@@ -14,6 +14,12 @@ class Product extends Model
     protected $fillables =['name','description','sale_price','purchase_price','categoty_id','stock'];
 
     public function category(){
-        return $this->belongsTo('App\Model\Category');
+        return $this->belongsTo(Category::class);
+    }
+
+    public function getProfitPercentAttribute(){
+        $profit = $this->sale_price - $this->purchase_price;
+        $profit_percent = $profit * 100 / $this->purchase_price;
+        return $profit_percent;
     }
 }

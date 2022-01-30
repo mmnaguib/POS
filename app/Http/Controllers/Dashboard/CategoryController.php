@@ -19,7 +19,7 @@ class CategoryController extends Controller
     public function index(Request $request){
         $categories = Category::where(function($q) use ($request){
             return $q->when($request->search,function ($query) use ($request){
-                return $query->where('cat_name', 'like' , '%' . $request->search . '%');
+                return $query->where('name->ar', 'like' , '%' . $request->search . '%')->orwhere('name->en', 'like' , '%' . $request->search . '%');;
             });
         })->latest()->paginate(5);
         return view('dashboard.categories.index',compact('categories'));

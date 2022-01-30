@@ -41,18 +41,18 @@
                             <label>@lang('site.product_image')</label>
                             <input type="file" class="form-control image" name="image" />
                         </div>
-                        <img src="{{ asset('images/default.png') }}" width="100" class="img-thumbnail image-preview"/>
+                        <img src="{{ asset('images/products/product.png') }}" width="100" class="img-thumbnail image-preview"/>
                         <div class="form-group">
                             <label>@lang('site.purchase_price')</label>
-                            <input type="number" step="any" class="form-control" name="purchase_price" />
+                            <input type="number" step="any" class="form-control" name="purchase_price" {{ old('purchase_price') }}/>
                         </div>
                         <div class="form-group">
                             <label>@lang('site.sale_price')</label>
-                            <input type="number" step="any" class="form-control" name="sale_price" />
+                            <input type="number" step="any" class="form-control" name="sale_price" {{ old('sale_price') }}/>
                         </div>
                         <div class="form-group">
                             <label>@lang('site.stock')</label>
-                            <input type="number" min="1" class="form-control" name="stock" />
+                            <input type="number" min="1" class="form-control" name="stock" {{ old('stock') }}/>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</button>
