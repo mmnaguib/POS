@@ -11,10 +11,14 @@ class Product extends Model
     use HasFactory;
     use HasTranslations;
     public $translatable  = ['name','description'];
-    protected $fillables =['name','description','sale_price','purchase_price','categoty_id','stock'];
+    protected $fillable =['name','description','sale_price','purchase_price','categoty_id','stock'];
 
     public function category(){
         return $this->belongsTo(Category::class);
+    }
+
+    public function orders(){
+        return $this->belongsToMany(order::class, 'product_order')->withPivot('quantity');;
     }
 
     public function getProfitPercentAttribute(){

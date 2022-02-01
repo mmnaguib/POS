@@ -6,7 +6,6 @@
             <ol class="breadcrumb">
                 <li><i class="fa fa-dashboard"></i><a href="{{ route('dashboard.index') }}">@lang('site.dashboard')</a></li>
                 <li><i class="fa fa-clients"></i><a href="{{ route('clients.index') }}">@lang('site.clients')</a></li>
-                <li><i class="fa fa-clients"></i><a href="{{ route('client.orders.index') }}">@lang('site.orders')</a></li>
                 <li class="active"></li>@lang('site.add')</li>
             </ol>
         </section>
@@ -38,8 +37,8 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
                                                         @foreach ($category->products as $product)
+                                                        <tr>
                                                             <td>{{ $product->name }}</td>
                                                             <td>{{ $product->stock }}</td>
                                                             <td>{{ $product->sale_price }}</td>
@@ -52,8 +51,8 @@
                                                                 data-price="{{ $product->sale_price }}">
                                                                 <i class="fa fa-plus"></i></a>
                                                             </td>
-                                                        @endforeach
                                                         </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -74,7 +73,7 @@
                             <h3 class="box-title">@lang('site.orders')</h3>
                         </div>
                         <div class="box-body">
-                            <form>
+                            <form method="POST" action="{{ route('client.orders.store', $client->id) }}"> @csrf
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -86,13 +85,47 @@
                                     <tbody class="order-list">
                                     </tbody>
                                 </table>
-                                <div>@lang('site.total'): <span class="total-price">0</span></div><br>
+                                <div>@lang('site.total'): <span class="total-price">0</span><input type="hidden" name="total" class="total-price-input"></div><br>
                                 <div>
-                                    <button id="add-order-form-btn" class="btn btn-block btn-primary disabled">@lang('site.add_order')</button>
+                                    <button type="submit" id="add-order-form-btn" class="btn btn-block btn-primary disabled">@lang('site.add_order')</button>
                                 </div>
                             </form>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-6">
+                    @if($client->orders->count() > 0)
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <h3 class="box-title">
+                                    @lang('site.previous_orders')
+                                    <small>{{ $orders->total() }}</small>
+                                </h3>
+                            </div>
+                            <div class="box-body">
+                                @foreach ($orders as $order)
+                                    <div class="panel-group">
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#{{ $order->created_at->format('d-m-y-s') }}">{{ $order->created_at->format('d-Y-M') }}</a>
+                                                </h4>
+                                                <div id="{{ $order->created_at->format('d-m-y-s') }}" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        <ul class="list-group">
+                                                            @foreach ($order->products as $product)
+                                                            <li class="list-group-item">{{ $product->name }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </section>

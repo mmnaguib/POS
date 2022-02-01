@@ -38,7 +38,7 @@ $(function() {
         var id = $(this).data('id');
 
         $(this).closest('tr').remove();
-        $('#product-' + id).removeClass('btn-default disabled').addClass('btn-success');
+        $('#product_' + id).removeClass('btn-default disabled').addClass('btn-success');
 
         //to calculate total price
         calculateTotal();
@@ -59,11 +59,10 @@ $(function() {
     //list all order products
     $('.order-products').on('click', function(e) {
 
-        e.preventDefault();
-
         $('#loading').css('display', 'flex');
 
         var url = $(this).data('url');
+        console.log(url);
         var method = $(this).data('method');
         $.ajax({
             url: url,
@@ -100,7 +99,6 @@ function calculateTotal() {
     });//end of product price
 
     $('.total-price').html($.number(price, 2));
-
     //check if price > 0
     if (price > 0) {
 

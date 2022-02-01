@@ -30,6 +30,9 @@
             @if (auth()->user()->hasPermission('clients_read'))
                 <li><a href="{{ route('clients.index') }}"><i class="fa fa-th"></i><span>@lang('site.clients')</span></a></li>
             @endif
+            @if (auth()->user()->hasPermission('orders_read'))
+                <li><a href="{{ route('orders.index') }}"><i class="fa fa-th"></i><span>@lang('site.orders')</span></a></li>
+            @endif
             {{--@if (auth()->user()->hasPermission('read_categories'))
                 <li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-th"></i><span>@lang('site.categories')</span></a></li>
             @endif

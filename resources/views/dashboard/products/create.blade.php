@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <label>@lang('site.category')</label>
                             <select class="form-control" name="category"  value="{{ old('category') }}" >
-                                <option value="" disabled selected>---- اختر ----</option>
+                                <option value="" disabled selected>@lang('site.all_categoreis')</option>
                                 @foreach ($categories as $cat)
                                 <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                                 @endforeach

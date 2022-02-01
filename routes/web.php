@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\ClientController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\Client\OrderController;
+use App\Http\Controllers\Dashboard\OrderController as OrderControllerAdmin;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -52,13 +53,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware'=> ['loca
         Route::post('clients/update/{id}',  [ClientController::class,'update'])->name('clients.update');
         Route::post('clients/destroy/{id}',  [ClientController::class,'destroy'])->name('clients.destroy');
 
-        // Orders Routes
-        Route::get('client/orders',  [OrderController::class,'index'])->name('client.orders.index');
-        Route::get('client/{id}/orders/create',  [OrderController::class,'create'])->name('client.orders.create');
-        Route::post('client/orders/store',  [OrderController::class,'store'])->name('client.orders.store');
-        Route::get('client/orders/edit/{id}',  [OrderController::class,'edit'])->name('client.orders.edit');
-        Route::post('client/orders/update/{id}',  [OrderController::class,'update'])->name('client.orders.update');
-        Route::post('client/orders/destroy/{id}',  [OrderController::class,'destroy'])->name('client.orders.destroy');
+        // Client Orders Routes
+        Route::resource('/client.orders', OrderController::class)->except('show');
 
         // Users Routes
         Route::get('users',  [UserController::class,'index'])->name('users.index');
@@ -68,6 +64,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware'=> ['loca
         Route::post('users/update/{id}',  [UserController::class,'update'])->name('users.update');
         Route::post('users/destroy/{id}',  [UserController::class,'destroy'])->name('users.destroy');
 
+        // Orders Routes
+        Route::resource('/orders', OrderControllerAdmin::class);
+        Route::get('/orders/{order}/products',  [OrderControllerAdmin::class,'products'])->name('orders.products');
     });
 });
 
