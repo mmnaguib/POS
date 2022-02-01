@@ -44,6 +44,7 @@ return [
     'deleted_successfully'      => 'Deleted Done successfully',
     'logout'                    => 'Logout',
 
+    'sales_graph'               => 'Chart of sales during the months',
     'previous_orders'           => 'Previous Orders',
     'edit_order'                => 'Edit Order',
     'print'                     => 'Print',

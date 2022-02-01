@@ -45,6 +45,7 @@ return [
     'deleted_successfully'      => 'تم الحذف بنجاح',
     'logout'                    => 'تسجيل الخروج',
 
+    'sales_graph'               => 'رسم توضيحي للمبيعات خلال الاشهر',
     'previous_orders'           => 'الطلبات السابقة',
     'edit_order'                => 'تعديل الطلب',
     'print'                     => 'طباعة',
